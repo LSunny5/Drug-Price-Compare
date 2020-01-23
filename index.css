@@ -2,16 +2,14 @@
     box-sizing: border-box;
   }
   
-  body {
+ body {
     font-family: 'Roboto', sans-serif;
     text-align: center;
-  }
+}
 
-
-  .hidden {
-    display: none;
-  }
-
+/**********************************/
+/*Start Screen CSS*/
+/*Start Screen box*/
 .startScreen {
     display: flex;
     flex-direction: column;
@@ -22,29 +20,183 @@
     margin: 50px 20px;
 }
 
-
+/*App description paragraph*/
 .appDescription {
     text-align: center;
     margin: 30px;
     width: 75%;
 }
 
+/*form for user to enter product they want to search*/
 .appInfo {
     margin: 10px;
 }
 
+/*statement for finding product*/
 label {
     margin: 20px;
     font-size: 20px;
     font-weight: bold;
 }
 
+/*textbox for searching*/
 #searchArea {
     padding: 6px;
     margin: 15px auto 20px;
 }
 
+/*button to go find the item*/
 .findButton {
     padding: 20px;
     margin: 20px;
 }
+
+/**********************************/
+/*Find Item screen*/
+/*find item section*/
+.findItem{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 30px;
+}
+
+/*text user entered for product name*/
+.userItem{
+    margin: 15px;
+}
+
+/*box holding all the products it could be*/
+.itemFindBox{
+    padding: 10px;
+    margin: 15px;
+    height: 20em;
+    border: 1px solid black;
+}
+
+/*button after user has selected product*/
+.submitItem {
+    margin: 15px;
+    padding: 20px 35px;
+}
+
+/*div where user can re-enter product info*/
+.searchAgainBox{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 20px;
+    padding: 5px;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.findTextBox{
+    display: inline-flex;
+}
+
+/*div for search text box*/
+.textBar{
+    display: inline-flex;
+    flex-direction: row;
+    width: 100%;
+    
+}
+/*question for re-entering the product*/
+.findQuery{
+    font-size: 14px;
+    padding: 10px;
+    margin: 5px;
+}
+
+/*text for searching for a new item*/
+#searchBar {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+/*css for search again button*/
+.searchAgainButton{
+    padding: 5px;
+}
+
+/**********************************/
+/*results screens*/
+/*results section*/
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/*new search question*/
+.repeatQuery{
+    margin: 5px 5px 0 5px;
+    font-size: 12px;
+}
+/*form for results section*/
+.restart {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+
+
+
+
+/*css for text area and button*/
+.textBar{
+    display: inline-flex;
+    justify-content: center;
+    margin: 5px auto;
+    width: 80%;
+}
+
+/*css for text area and button on results screen*/
+#searchBar2 {
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 5px 0 0 5px;
+    padding: 5px;
+}
+
+.searchAgainButton2 {
+    border: 1px solid black;
+    border-radius: 0 5px 5px 0;
+    font-size: 20px;
+}
+ 
+.resultsText{
+    margin: 10px;
+}
+
+/*cheapest box*/
+.cheapest {
+    border: 2px solid black;
+    height: 9em;
+    width: 80%;
+    border-radius: 30px;
+    margin: 10px;
+}
+
+/*other box*/
+.other {
+    border: 1px solid black;
+    height: 9em;
+    width: 70%;
+    border-radius: 30px;
+    margin: 10px;
+
+}
+
+
+/**********************************/
+/*other*/
+.hidden {
+    display: none;
+ }

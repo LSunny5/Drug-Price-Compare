@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>VIP Price Compare Application</title>
+    <meta name="description"
+        content="This app will help find the cheapest price for a same item in 3 different stores.">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <section class="startScreen">
+        <h1>VIP Price Compare</h1>
+        <p class="appDescription">Welcome! This application will help you find a product in Amazon and compare the
+            price
+            to Walmart or Target and find the cheapest one. Once found, you can click the URL to go to that item
+            page.
+        </p>
+        <form class="appInfo">
+            <label for="search">Please enter the item you would like to compare:</label>
+            <br>
+            <input type="text" name="search" id="searchArea" placeholder="hatchimals, cat temptations, etc... "
+                autofocus="autofocus" required>
+            <br>
+            <button class="findButton" type="submit">Find my item!</button>
+        </form>
+    </section>
+
+    <section id="findItem" class="hidden">
+        <h2>Let's first find your item...</h2>
+        <p class="userItem"></p>
+        <div class="itemFind">
+            <ul class="itemList">
+            </ul>
+        </div>
+        <button class="submitItem" type="submit">That's it! Let's Go!</button>
+        <form>
+            <label for="repeatSearch">Can't find your item? Enter item again...</label>
+            <input type="text" name="repeatSearch" id="searchBar" placeholder="Enter item here... ">
+            <button class="searchAgainButton" type="submit"></button>
+        </form>
+    </section>
+
+    <main class="hidden">
+        <form>
+            <label for="repeatSearch">New Search?</label>
+            <input type="text" name="repeatSearch" id="searchBar" placeholder="Enter item here... " required>
+            <button class="searchAgainButton" type="submit"></button>
+        </form>
+        <h2>Results</h2>
+        <div class="cheapest"></div>
+        <div class="other"></div>
+        <div class="other"></div>
+    </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

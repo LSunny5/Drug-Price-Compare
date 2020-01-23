@@ -1,0 +1,50 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+  }
+
+
+  .hidden {
+    display: none;
+  }
+
+.startScreen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    margin: 50px 20px;
+}
+
+
+.appDescription {
+    text-align: center;
+    margin: 30px;
+    width: 75%;
+}
+
+.appInfo {
+    margin: 10px;
+}
+
+label {
+    margin: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#searchArea {
+    padding: 6px;
+    margin: 15px auto 20px;
+}
+
+.findButton {
+    padding: 20px;
+    margin: 20px;
+}

@@ -11,7 +11,7 @@ function displayResults(responseJson, numResults) {
     //  $('#error-message').empty();
 
     // iterate through the items array
-    for (let i = 0; i < responseJson.data.length & i < numResults; i++) {
+  //  for (let i = 0; i < responseJson.data.length & i < numResults; i++) {
         // for each park object, add full name, description, website URL, and park address
         //   $('#results-list').append(
         //      `<li><h3>${responseJson.data[i].fullName}</h3>
@@ -24,22 +24,65 @@ function displayResults(responseJson, numResults) {
         //      <a href="${responseJson.data[i].url}">${responseJson.data[i].url}</a>
         //       </li>`
         //   )
-    };
+  //  };
 
     //display the results section  
-    $('#results').removeClass('hidden');
+ //   $('#results').removeClass('hidden');
 };
 
-function formatQueryParams(params) {
-    const queryItems = Object.keys(params)
-        .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
-    return queryItems.join('&');
+//function formatQueryParams(params) {
+//    const queryItems = Object.keys(params)
+//        .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+ //   return queryItems.join('&');
+//}
+
+
+function restartApp() {
+
+    //app sent to restart function
+   // console.log('This is step 3');
+
+
+    $('.restart').submit(event => {
+        event.preventDefault();
+        let restartSearch = $('#searchBar2').val();
+
+        console.log(restartSearch);
+
+            $('.startScreen').addClass('hidden');
+            $('#findItem').removeClass('hidden');
+            $('main').addClass('hidden');
+            
+            //print after app is restarted
+         //   console.log('this is step 4');
+          //  console.log(restartSearch);
+
+          
+            $('.userItem').html(restartSearch);
+            $('#searchBar2').val('');
+
+
+    });
 }
 
 
+function comparePrice(product) {
+    $('#findItem').on('click', '.submitItem', function (event) {
+        $('.startScreen').addClass('hidden');
+        $('#findItem').addClass('hidden');
+        $('main').removeClass('hidden');
+        //console.log(product);
+        //console.log('this is good');
+        //findUserItem(product);
+        
+        $('#searchBar2').focus();
+
+
+    });
 
 
 
+}
 
 
 
@@ -47,19 +90,34 @@ function formatQueryParams(params) {
 
 /*event listener for if user enters a new item*/
 function searchAgain() {
-    //console.log('This is step 2');
-    $('.findTextBox').on('click', '.searchAgainButton', function (event) {
-        const item2 = $('.findItemQuery').val();
-        if (item2 === '') {
+
+
+  //  console.log('This is step 2');
+    
+    
+    $('.findTextBox').on('click', '.goButton', function (event) {
+        let itemName = $('.findItemQuery').val();
+
+        //print item after clicking arrow button
+       // console.log(itemName);
+
+        if (itemName === '') {
             event.preventDefault();
             alert('Please enter an item in the text box...');
-           
+
+            //print if user enters nothing in text search
+          //  console.log('problem here');
+
+
         } else {
             event.preventDefault();
-    
-           // console.log('this is step 3');
-            //console.log(item2);
-            $('.userItem').html(item2);
+
+            //print if user entered words in text search
+           //  console.log('this is step 3');
+           // console.log(itemName);
+
+
+            $('.userItem').html(itemName);
             $('.findItemQuery').val('');
         }
 
@@ -67,9 +125,20 @@ function searchAgain() {
     //searchAgain();
 }
 
+
+
+
+
+
+
+
+
+
+
+
 /*find the item in a list screen*/
 function findUserItem(item) {
-    
+
     $('.startScreen').addClass('hidden');
     $('main').addClass('hidden');
     $('#findItem').removeClass('hidden');
@@ -80,7 +149,7 @@ function findUserItem(item) {
     $('.userItem').html(item);
 
     //searchAgain();
-
+    comparePrice(item);
 
 
     //    const params = {
@@ -122,12 +191,13 @@ function findUserItem(item) {
 
 /*start app wait for user to enter product and submit*/
 function startApp() {
-    $('.appInfo').submit(event => {
+    $('.startScreen').submit(event => {
         event.preventDefault();
         const userItem = $('#searchArea').val();
         findUserItem(userItem);
     });
     searchAgain();
+    restartApp();
 }
 
 $(startApp);

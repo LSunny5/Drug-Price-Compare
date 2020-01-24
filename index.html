@@ -33,7 +33,7 @@
     </section>
 
     <section id="findItem" class="hidden">
-        <h2>Let's first find your item...</h2>
+        <h2>Let's find your item...</h2>
         <p class="userItem">Item</p>
         <div class="itemFindBox">
             <ul class="itemList"></ul>
@@ -44,7 +44,7 @@
             <div class="findTextBox">
                 <input type="text" class="findItemQuery" name="repeatSearch" id="searchBar"
                     placeholder="Enter item here... ">
-                <button class="searchAgainButton" type="submit">&#10148;</button>
+                <button class="searchAgainButton goButton" type="submit">&#10148;</button>
             </div>
         </form>
     </section>
@@ -53,9 +53,9 @@
         <form class="restart">
             <label class="repeatQuery" for="repeatSearch">New Search?</label>
             <div class="textBar">
-                <input type="text" name="repeatSearch" id="searchBar2" placeholder="Enter item here... "
-                    autofocus="autofocus" required>
-                <button class="searchAgainButton2" type="submit">&#10148;</button>
+                <input type="text" class="findItemQuery" name="repeatSearch" id="searchBar2" placeholder="Enter item here... "
+                required>
+                <button class="searchAgainButton2 goButton" type="submit">&#10148;</button>
             </div>
         </form>
         <h2 class="resultsText">Results</h2>

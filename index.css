@@ -49,6 +49,7 @@ label {
 .findButton {
     padding: 20px;
     margin: 20px;
+    cursor: pointer;
 }
 
 /**********************************/
@@ -79,6 +80,7 @@ label {
 .submitItem {
     margin: 15px;
     padding: 20px 35px;
+    cursor: pointer;
 }
 
 /*div where user can re-enter product info*/
@@ -121,6 +123,7 @@ label {
 /*css for search again button*/
 .searchAgainButton{
     padding: 5px;
+    cursor: pointer;
 }
 
 /**********************************/

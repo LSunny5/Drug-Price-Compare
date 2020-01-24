@@ -39,10 +39,6 @@ function displayResults(responseJson, numResults) {
 
 function restartApp() {
 
-    //app sent to restart function
-   // console.log('This is step 3');
-
-
     $('.restart').submit(event => {
         event.preventDefault();
         let restartSearch = $('#searchBar2').val();
@@ -52,14 +48,10 @@ function restartApp() {
             $('.startScreen').addClass('hidden');
             $('#findItem').removeClass('hidden');
             $('main').addClass('hidden');
-            
-            //print after app is restarted
-         //   console.log('this is step 4');
-          //  console.log(restartSearch);
-
+       
           
             $('.userItem').html(restartSearch);
-            $('#searchBar2').val('');
+            $('.findItemQuery').val('');
 
 
     });
@@ -71,10 +63,6 @@ function comparePrice(product) {
         $('.startScreen').addClass('hidden');
         $('#findItem').addClass('hidden');
         $('main').removeClass('hidden');
-        //console.log(product);
-        //console.log('this is good');
-        //findUserItem(product);
-        
         $('#searchBar2').focus();
 
 
@@ -90,31 +78,17 @@ function comparePrice(product) {
 
 /*event listener for if user enters a new item*/
 function searchAgain() {
-
-
-  //  console.log('This is step 2');
     
     
     $('.findTextBox').on('click', '.goButton', function (event) {
         let itemName = $('.findItemQuery').val();
 
-        //print item after clicking arrow button
-       // console.log(itemName);
-
         if (itemName === '') {
             event.preventDefault();
             alert('Please enter an item in the text box...');
 
-            //print if user enters nothing in text search
-          //  console.log('problem here');
-
-
         } else {
             event.preventDefault();
-
-            //print if user entered words in text search
-           //  console.log('this is step 3');
-           // console.log(itemName);
 
 
             $('.userItem').html(itemName);
@@ -122,7 +96,7 @@ function searchAgain() {
         }
 
     });
-    //searchAgain();
+
 }
 
 
@@ -143,12 +117,7 @@ function findUserItem(item) {
     $('main').addClass('hidden');
     $('#findItem').removeClass('hidden');
 
-    //print to console to check
-    //console.log(item);
-
     $('.userItem').html(item);
-
-    //searchAgain();
     comparePrice(item);
 
 

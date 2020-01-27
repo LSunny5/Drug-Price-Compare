@@ -21,14 +21,14 @@
 }
 
 /*App description paragraph*/
-.appDescription {
+.summary {
     text-align: center;
     margin: 30px;
     width: 75%;
 }
 
 /*form for user to enter product they want to search*/
-.appInfo {
+.startForm {
     margin: 10px;
 }
 
@@ -40,7 +40,7 @@ label {
 }
 
 /*textbox for searching*/
-#searchArea {
+#startItemText {
     padding: 6px;
     margin: 15px auto 20px;
 }
@@ -55,12 +55,8 @@ label {
 /**********************************/
 /*Find Item screen*/
 /*find item section*/
-.findItem{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    margin: 30px;
+#findScreen{
+
 }
 
 /*text user entered for product name*/
@@ -72,9 +68,45 @@ label {
 .itemFindBox{
     padding: 10px;
     margin: 15px;
-    height: 20em;
+    height: 19em;
     border: 1px solid black;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
 }
+
+.radioChoice {
+    list-style-type: none;
+    
+}
+
+.choiceLabel{
+    border: 1px solid black;
+    width: 100%;
+    height: 100%;
+}
+
+.radioChoice:checked + label {
+    border: 3px solid black;
+    background: red;
+
+  }
+
+
+  .choiceLabel:hover {
+    border: 5px solid black;
+    background: blue;
+
+  }
+
+
+
+
+
+
+
 
 /*button after user has selected product*/
 .submitItem {
@@ -178,6 +210,12 @@ main {
     margin: 10px;
 }
 
+
+
+
+
+
+
 /*cheapest box*/
 .cheapest {
     border: 2px solid black;
@@ -185,7 +223,17 @@ main {
     width: 80%;
     border-radius: 30px;
     margin: 10px;
+
+
 }
+
+
+
+
+
+
+
+
 
 /*other box*/
 .other {

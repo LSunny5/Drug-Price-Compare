@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>VIP Price Compare Application</title>
+    <title>Drug Price Compare Application</title>
     <meta name="description"
-        content="This app will help find the cheapest price for a same item in 3 different stores.">
+        content="This app will show the prices of different drugs set at different standards. ">
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
     <link rel="shortcut icon" href="#">
@@ -16,27 +16,23 @@
 
 <body>
     <section class="startScreen">
-        <h1>VIP Price Compare</h1>
-        <p class="appDescription">Welcome! This application will help you find a product in Amazon and compare the
-            price
-            to Walmart or Target and find the cheapest one. Once found, you can click the URL to go to that item
-            page.
-        </p>
-        <form class="appInfo">
-            <label for="search">Please enter the item you would like to compare:</label>
+        <h1>Drug Price Compare</h1>
+        <p class="summary">Welcome! This application will show you the different prices set by the government for various drugs.</p>
+        <form class="startForm">
+            <label for="query">Please enter the drug you would like to compare:</label>
             <br>
-            <input type="text" name="search" id="searchArea" placeholder="hatchimals, cat temptations, etc... "
+            <input type="text" name="query" id="startItemText" placeholder="hatchimals, cat temptations, etc... "
                 autofocus="autofocus" required>
             <br>
-            <button class="findButton" type="submit">Find my item!</button>
+            <button class="findButton" type="submit">Find my drug!</button>
         </form>
     </section>
 
-    <section id="findItem" class="hidden">
-        <h2>Let's find your item...</h2>
+    <section id="findScreen" class="hidden">
+        <h2>Let's find your drug...</h2>
         <p class="userItem">Item</p>
         <div class="itemFindBox">
-            <ul class="itemList"></ul>
+            <div class="errorMessage"></div>
         </div>
         <button class="submitItem" type="submit">That's it! Let's Go!</button>
         <form class="searchAgainBox">
@@ -59,7 +55,7 @@
             </div>
         </form>
         <h2 class="resultsText">Results</h2>
-        <div class="cheapest"></div>
+        <div class="other"></div>
         <div class="other"></div>
         <div class="other"></div>
     </main>

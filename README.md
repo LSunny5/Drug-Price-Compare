@@ -1,3 +1,3 @@
-# VIP-Price-Compare
+# Drug-Price-Compare
 
-Web Application built with various product APIs such as Walmart, Target, and Amazon to compare prices for an item so that a user can find the cheapest price of that same item from the various brands and go to that site.  
+This web Application was built with data from the Medicaid.gov API, using the NADAC (National Average Drug Acquisition Cost) and the ACA FUL (Affordable Care Act Federal Upper Limit) endpoints.  NADAC pricing is similar to the average pharmacy drug costs and not the manufacturer's costs.  The FUL is the maximum reimbursement amount given for certain drugs.  It will show the various prices of different drugs and highlight the lowest.  

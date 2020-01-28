@@ -21,7 +21,7 @@
         <form class="startForm">
             <label for="query">Please enter the drug you would like to compare:</label>
             <br>
-            <input type="text" name="query" id="startItemText" placeholder="enema, abreva 10% cream... "
+            <input type="text" name="query" id="startItemText" placeholder="tamiflu, pennicilin, etc... "
                 autofocus="autofocus" required>
             <br>
             <button class="findButton" type="submit">Find my drug!</button>
@@ -30,33 +30,31 @@
 
     <section id="findScreen" class="hidden">
         <h2>Let's find your drug...</h2>
-        <p class="userItem">Item</p>
-        <div class="itemFindBox">
-            <div class="errorMessage"></div>
-        </div>
-        <button class="submitItem" type="submit">That's it! Let's Go!</button>
-        <form class="searchAgainBox">
-            <label class="findQuery" for="repeatSearch">Can't find your item? Enter item again...</label>
-            <div class="findTextBox">
-                <input type="text" class="findItemQuery" name="repeatSearch" id="searchBar"
+        <p class="userInput">Item</p>
+        <div class="drugList"></div>
+        <button class="foundButton" type="submit">That's it! Let's Go!</button>
+        <form class="searchBox">
+            <label class="query1" for="repeat">Can't find your item? Enter item again...</label>
+            <div class="searchTextBox">
+                <input type="text" class="searchText" name="repeat" id="searchText1"
                     placeholder="Enter item here... ">
-                <button class="searchAgainButton goButton" type="submit">&#10148;</button>
+                <button class="searchButton1 goButton" type="submit">&#10148;</button>
             </div>
         </form>
     </section>
 
     <main class="hidden">
         <form class="restart">
-            <label class="repeatQuery" for="repeatSearch">New Search?</label>
-            <div class="textBar">
-                <input type="text" class="findItemQuery" name="repeatSearch" id="searchBar2" placeholder="Enter item here... "
+            <label class="query2" for="repeatSearch">New Search?</label>
+            <div class="searchTextBox2">
+                <input type="text" class="searchText" name="repeatSearch" id="searchText2" placeholder="Enter item here... "
                 required>
-                <button class="searchAgainButton2 goButton" type="submit">&#10148;</button>
+                <button class="searchButton2 goButton" type="submit">&#10148;</button>
             </div>
         </form>
         <h2 class="resultsText">Results</h2>
-        <div class="other1 other"></div>
-        <div class="other2 other"></div>
+        <div class="nadacBox box"></div>
+        <div class="acaBox box"></div>
     
     </main>
 

@@ -109,7 +109,8 @@ function findUserItem(item) {
 
 //get the checked JSON values for the result screen
 function getValues(checkedResponse) {
-    $('#findScreen').on('click', '.foundButton', function (event) {
+    $('.foundButton').focus();
+    $('#findScreen').one('click', '.foundButton', function (event) {
         let objPosition = $('input:checked').attr('id');
 
         //variables to hold the strings of the JSON selected object
@@ -132,47 +133,31 @@ function displayDrugChoices(responseJson) {
     if (JSON.stringify(responseJson) === '[]') {
         $('.drugList').text(`Sorry drug was not found, please try again...`);
         $('.foundButton').attr('disabled', true);
+        $('#searchText1').focus();
     } else {
+        //filter through objects from JSON fetch and remove duplicate ndc numbers
+        let temp = [...new Map(responseJson.map(drug => [drug.ndc, drug])).values()];
 
-
-
-        
-
-
-        
-
-
-
-        //cycle through each JSON object
-        for (let i = 0; i < maxResults; i++) {
-            //add generic or brand text to choices
+        //cycle through each object in created temp array
+        for (let i = 0; i < temp.length; i++) {
             let drugType = "";
-            if (responseJson[i].classification_for_rate_setting === "G") {
+            if (temp[i].classification_for_rate_setting === "G") {
                 drugType = "(Generic)"
-            } else if (responseJson[i].classification_for_rate_setting === "B") {
+            } else if (temp[i].classification_for_rate_setting === "B") {
                 drugType = "(Brand)"
             } else {
                 drugType = "(Unknown)"
             }
 
-
-            
-
-
-
-
-
-
-            
             //create radio buttons
             $('.drugList').append(
-                `<label class="choiceLabel" for="${i}"><input type="radio" class="radioChoice" id="${i}" name="drugChoices" value ="${responseJson[i]}">${responseJson[i].ndc_description} ${drugType} <p>NDC No: ${responseJson[0].ndc}</p></label>`
+                `<label class="choiceLabel" for="${i}"><input type="radio" class="radioChoice" id="${i}" name="drugChoices" value ="${temp[i]}">${temp[i].ndc_description} ${drugType} <p>NDC No: ${temp[i].ndc}</p></label>`
             );
             //set first radio button to be default checked
             $("#0").prop("checked", true);
             $('.foundButton').attr('disabled', false);
         }
-        getValues(responseJson);
+        getValues(temp);
     }
 }
 

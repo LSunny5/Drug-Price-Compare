@@ -115,7 +115,7 @@ label {
 
 /*div where user can re-enter product info*/
 .searchBox{
-    position: fixed;
+    position: relative;
     bottom: 0;
     width: 100%;
     font-size: 20px;
@@ -232,7 +232,6 @@ main {
 /*container for drugs css*/
 .box {
     border: 1px solid black;
-    height: 9em;
     width: 70%;
     border-radius: 30px;
     margin: 10px;

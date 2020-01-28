@@ -4,22 +4,12 @@
 const baseNURL = 'https://data.medicaid.gov/resource/a4y5-998d.json?$where=ndc_description like ';
 const baseAURL = 'https://data.medicaid.gov/resource/yns6-zx8k.json';
 
-
-
-
-
-
-
-/*Button on results screen that will submit a new search*/
+//button listener to restart the search and find new drug 
 function restartApp() {
-    // console.log('eight');
     $('.restart').submit(event => {
         event.preventDefault();
-        //  console.log('nine');
         let restartSearch = $('#searchText2').val();
         restartSearch = restartSearch.toUpperCase();
-
-        //console.log(restartSearch);
 
         $('.startScreen').addClass('hidden');
         $('#findScreen').removeClass('hidden');
@@ -28,39 +18,30 @@ function restartApp() {
         $('.searchText').val('');
 
         drugFind(restartSearch);
-
-
     });
 }
 
-
-
-function displayACAInfo(responseA) {
-
-    let acaFirst = responseA[0];
-    let acaPrice = acaFirst.aca_ful;
-    let acaCost = (Math.round(acaPrice * 100) / 100).toFixed(2);
-
-
+//Display ACA FUL pricing to screen
+function printACA(response) {
+    let acaFirst = response[0];
     $('.acaBox').empty();
-    if (JSON.stringify(responseA) === '[]') {
-        $('.acaBox').text(`Sorry there was no matching drug...there are no ACA FUL pricing for over the counter drugs.`);
+
+    if (JSON.stringify(response) === '[]') {
+        $('.acaBox').html(`
+        <p class="title">ACA FUL Pricing<p>
+        <p>Sorry there was no matching drug...there are no ACA FUL pricing for over the counter drugs.</p>`);
     } else {
+        let acaPrice = acaFirst.aca_ful;
+        let acaCost = (Math.round(acaPrice * 100) / 100).toFixed(2);
+
         $('.acaBox').html(`
         <p class="title">ACA FUL Pricing<p>
         <p>The main ingredient name is ${acaFirst.ingredient}.</p>
         <p>$${acaCost} / ${acaFirst.mdr_unit_type}</p> 
         `);
-
-
-
-
     }
-
-
-
-
 }
+
 //setup text for URL 
 function formatQueryParams(params) {
     const queryItems = Object.keys(params)
@@ -68,41 +49,35 @@ function formatQueryParams(params) {
     return queryItems.join('&');
 }
 
+//get JSON objects for the ACA FUL values
 function acaFind(drugNDC) {
-
-
-
     const paramsACA = {
         ndc: drugNDC
-        //effective_date: recentDate
     }
     const queryString = formatQueryParams(paramsACA);
     const urlA = baseAURL + '?' + queryString;
 
-    //console.log(url);
     fetch(urlA)
         .then(response => {
             if (response.ok) {
-                //console.log(response);
-                //console.log(response.status);
                 return response.json();
             }
             throw new Error(response.statusText);
         })
-
-        .then(responseJson => displayACAInfo(responseJson))
-
+        .then(responseJson => printACA(responseJson))
         .catch(err => {
             $('.acaBox').text(`Sorry you have encountered an error: ${err.message}`);
         });
 }
 
-
-function comparePrice(name, ndc, nPrice, unit, otc) {
+//display content to the NADAC pricing box
+function printNADAC(name, ndc, nPrice, unit, otc) {
     $('.startScreen').addClass('hidden');
     $('#findScreen').addClass('hidden');
     $('main').removeClass('hidden');
     $('#searchText2').focus();
+
+    //convert values to usable terms for web app
     let otcYorN = '';
     if (otc === 'Y') {
         otcYorN = "over the counter";
@@ -111,21 +86,17 @@ function comparePrice(name, ndc, nPrice, unit, otc) {
     }
 
     acaFind(ndc);
-
-
-
-
-
+    //print to nadac box
     $('.nadacBox').html(`
-    <p class="title">NADAC Pricing<p>
-    <p>${name}<span> $${nPrice} / ${unit}</p>
-    <p>${name} is ${otcYorN}</p>
+        <p class="title">NADAC Pricing<p>
+        <p>${name}</p>
+        <p> $${nPrice} / ${unit}</p>
+        <p>${name} is ${otcYorN}</p>
+        <p>NDC No: ${ndc}</p>
     `);
-
-
 }
 
-/*find the item in a list screen*/
+//find the item on the list screen display
 function findUserItem(item) {
     $('.drugList').empty();
     $('.startScreen').addClass('hidden');
@@ -133,57 +104,24 @@ function findUserItem(item) {
     $('#findScreen').removeClass('hidden');
     $('.userInput').html(item);
     $('.foundButton').focus();
-
-    // console.log('six');
-
     drugFind(item);
-
 }
 
-//get the checked JSON values for result screen
+//get the checked JSON values for the result screen
 function getValues(checkedResponse) {
     $('#findScreen').on('click', '.foundButton', function (event) {
         let objPosition = $('input:checked').attr('id');
 
-        console.log('here is the problem');
-//////////////////////////////////////////////////////////////////////
-        
-        
-        //if there are no choices selected will be undefined
-        if (objPosition === undefined) {
-            alert('Sorry, cannot find drug, please enter another name in text below.');
-        } else {
-            //variables to hold the strings of the JSON selected object
-            let ndcTemp = checkedResponse[objPosition].ndc;
-            let nPrice1 = checkedResponse[objPosition].nadac_per_unit
-            let unitTemp = checkedResponse[objPosition].pricing_unit;
-            let otcTemp = checkedResponse[objPosition].otc;
-            let nameTemp = checkedResponse[objPosition].ndc_description;
-
-            let nPriceTemp = (Math.round(nPrice1 * 100) / 100).toFixed(2);
-
-
-
-            console.log("ndc number is " + ndcTemp);
-
-
-            comparePrice(nameTemp, ndcTemp, nPriceTemp, unitTemp, otcTemp);
-
-    
-        }
-
-
-
-
+        //variables to hold the strings of the JSON selected object
+        let ndc = checkedResponse[objPosition].ndc;
+        let price = checkedResponse[objPosition].nadac_per_unit
+        let unit = checkedResponse[objPosition].pricing_unit;
+        let otc = checkedResponse[objPosition].otc;
+        let name = checkedResponse[objPosition].ndc_description;
+        let nPrice = (Math.round(price * 100) / 100).toFixed(2);
+        printNADAC(name, ndc, nPrice, unit, otc);
     });
 }
-
-
-
-
-
-
-
 
 //display JSON objects to the drug list div for user to find
 function displayDrugChoices(responseJson) {
@@ -193,8 +131,19 @@ function displayDrugChoices(responseJson) {
     //check to see JSON objects were returned
     if (JSON.stringify(responseJson) === '[]') {
         $('.drugList').text(`Sorry drug was not found, please try again...`);
+        $('.foundButton').attr('disabled', true);
     } else {
-        //cycle through each object
+
+
+
+        
+
+
+        
+
+
+
+        //cycle through each JSON object
         for (let i = 0; i < maxResults; i++) {
             //add generic or brand text to choices
             let drugType = "";
@@ -205,15 +154,26 @@ function displayDrugChoices(responseJson) {
             } else {
                 drugType = "(Unknown)"
             }
+
+
+            
+
+
+
+
+
+
+            
             //create radio buttons
             $('.drugList').append(
                 `<label class="choiceLabel" for="${i}"><input type="radio" class="radioChoice" id="${i}" name="drugChoices" value ="${responseJson[i]}">${responseJson[i].ndc_description} ${drugType} <p>NDC No: ${responseJson[0].ndc}</p></label>`
             );
             //set first radio button to be default checked
             $("#0").prop("checked", true);
+            $('.foundButton').attr('disabled', false);
         }
+        getValues(responseJson);
     }
-    getValues(responseJson);
 }
 
 //fetch JSON objects related to the user's input for Drug text
@@ -221,8 +181,6 @@ function drugFind(drugName) {
     let capDrug = drugName.toUpperCase();
     const filter = `'%25${capDrug}%25'`;
     const url = baseNURL + filter;
-
-    console.log(url);
 
     fetch(url)
         .then(response => {

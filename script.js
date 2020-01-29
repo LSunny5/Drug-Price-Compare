@@ -21,23 +21,39 @@ function restartApp() {
     });
 }
 
-//Display ACA FUL pricing to screen
+//Display ACA FUL pricing to screen and AMP pricing
 function printACA(response) {
     let acaFirst = response[0];
     $('.acaBox').empty();
+    $('.ampBox').empty();
 
+    //display ACA FUL pricing to webpage
     if (JSON.stringify(response) === '[]') {
         $('.acaBox').html(`
-        <p class="title">ACA FUL Pricing<p>
-        <p>Sorry there was no matching drug...there are no ACA FUL pricing for over the counter drugs.</p>`);
+        <p class="title">ACA FUL Pricing (Medicaid Upper Limit Costs)<p>
+        <p>Sorry there is no ACA FUL pricing for over the counter drugs.</p>`);
     } else {
         let acaPrice = acaFirst.aca_ful;
         let acaCost = (Math.round(acaPrice * 100) / 100).toFixed(2);
 
         $('.acaBox').html(`
-        <p class="title">ACA FUL Pricing<p>
+        <p class="title">ACA FUL Pricing (Medicaid Upper Limit Costs)<p>
         <p>The main ingredient name is ${acaFirst.ingredient}.</p>
         <p>$${acaCost} / ${acaFirst.mdr_unit_type}</p> 
+        `);
+    }
+
+    //display AMP pricing to webpage
+    if (JSON.stringify(response) === '[]') {
+        $('.ampBox').html(`
+        <p class="title">AMP Pricing (Average Manufacturer Price)<p>
+        <p>Sorry there is no AMP data for over the counter drugs.</p>`);
+    } else {
+        let ampPrice = acaFirst.weighted_average_amps;
+        let ampCost = (Math.round(ampPrice * 100) / 100).toFixed(2);
+        $('.ampBox').html(`
+        <p class="title">AMP Pricing (Average Manufacturer Price)<p>
+        <p>$${ampCost} / ${acaFirst.mdr_unit_type}</p> 
         `);
     }
 }
@@ -88,7 +104,7 @@ function printNADAC(name, ndc, nPrice, unit, otc) {
     acaFind(ndc);
     //print to nadac box
     $('.nadacBox').html(`
-        <p class="title">NADAC Pricing<p>
+        <p class="title">NADAC Pricing (Prices Pharmacy Pays)<p>
         <p>${name}</p>
         <p> $${nPrice} / ${unit}</p>
         <p>${name} is ${otcYorN}</p>

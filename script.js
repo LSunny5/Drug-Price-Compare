@@ -154,6 +154,11 @@ function displayDrugChoices(responseJson) {
         //filter through objects from JSON fetch and remove duplicate ndc numbers
         let temp = [...new Map(responseJson.map(drug => [drug.ndc, drug])).values()];
 
+        //sort results with drug name and then the ndc number
+        temp.sort(function (a,b) {
+            return a.ndc_description.localeCompare(b.ndc_description) || a.ndc-b.ndc;
+        })
+        
         //cycle through each object in created temp array
         for (let i = 0; i < temp.length; i++) {
             let drugType = "";

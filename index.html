@@ -17,7 +17,8 @@
 <body>
     <section class="startScreen">
         <h1>Drug Price Compare</h1>
-        <p class="summary">Welcome! This application will show you the different prices set by the government for various drugs.</p>
+        <p class="summary">Welcome!</p>
+        <p>This application will show you different prices for a particular drug.  The National Average Drug Acquisition Cost, Affordable Care Act Federal Upper Limits Pricing, and Average Manufacturer's Pricing. </p>
         <form class="startForm">
             <label for="query">Please enter the drug you would like to compare:</label>
             <br>
@@ -31,6 +32,7 @@
     <section id="findScreen" class="hidden">
         <h2>Let's find your drug...</h2>
         <p class="userInput">Item</p>
+        <p>Please select one to compare below...</p>
         <div class="drugList"></div>
         <button class="foundButton" type="submit">That's it! Let's Go!</button>
         <form class="searchBox">
@@ -52,7 +54,7 @@
                 <button class="searchButton2 goButton" type="submit">&#10148;</button>
             </div>
         </form>
-        <h2 class="resultsText">Results</h2>
+        <h2 class="resultsText">Prices</h2>
         <div class="nadacBox box"></div>
         <div class="acaBox box"></div>
         <div class="ampBox box"></div>
@@ -61,5 +63,4 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="script.js"></script>
 </body>
-
 </html>

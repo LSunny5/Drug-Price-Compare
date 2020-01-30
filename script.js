@@ -36,9 +36,12 @@ function printACA(response) {
         let acaPrice = acaFirst.aca_ful;
         let acaCost = (Math.round(acaPrice * 100) / 100).toFixed(2);
 
+        $('.drugDesc').append(` 
+            <p>The main ingredient name is ${acaFirst.ingredient}.</p>
+        `);
+
         $('.acaBox').html(`
         <p class="title">ACA FUL Pricing (Medicaid Upper Limit Costs)<p>
-        <p>The main ingredient name is ${acaFirst.ingredient}.</p>
         <p>$${acaCost} / ${acaFirst.mdr_unit_type}</p> 
         `);
     }
@@ -98,17 +101,21 @@ function printNADAC(name, ndc, nPrice, unit, otc) {
     if (otc === 'Y') {
         otcYorN = "over the counter";
     } else {
-        otcYorN = "not over the counter";
+        otcYorN = "NOT over the counter";
     }
 
     acaFind(ndc);
+    //print to Drug Description Box
+    $('.drugDesc').html(` 
+        <p class="title">${name}</p>
+        <p>${name} is ${otcYorN}</p>
+        <p>NDC No: ${ndc}</p>
+    `);
+
     //print to nadac box
     $('.nadacBox').html(`
         <p class="title">NADAC Pricing (Prices Pharmacy Pays)<p>
-        <p>${name}</p>
         <p> $${nPrice} / ${unit}</p>
-        <p>${name} is ${otcYorN}</p>
-        <p>NDC No: ${ndc}</p>
     `);
 }
 
@@ -158,7 +165,7 @@ function displayDrugChoices(responseJson) {
         temp.sort(function (a,b) {
             return a.ndc_description.localeCompare(b.ndc_description) || a.ndc-b.ndc;
         })
-        
+
         //cycle through each object in created temp array
         for (let i = 0; i < temp.length; i++) {
             let drugType = "";

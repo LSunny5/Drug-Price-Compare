@@ -1,10 +1,26 @@
 * {
     box-sizing: border-box;
-  }
+    /*This work, "B+WPrescipPrice", is a derivative of "Prescription Prices Ver1" by Chris Potter, used under ccPixs.com.  
+    "B+WPrescipPrice" is licensed under ccPixs.com by Sunny Lee.  */
+    background: url(images/B+WPrescipPrice.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    
+}
   
  body {
-    font-family: 'Roboto', sans-serif;
     text-align: center;
+    font-family:  'Vollkorn', serif;
+    color: white;
+}
+
+h1 {
+    font-family:  'Merienda', cursive;
+    font-size: 36px;
+    margin: 5%;
+    flex-grow: 1;
 }
 
 /**********************************/
@@ -16,8 +32,8 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    margin: 12% 5%;
 
-    margin: 50px 20px;
 }
 
 /*App description paragraph*/
@@ -29,70 +45,155 @@
 
 /*form for user to enter product they want to search*/
 .startForm {
-    margin: 10px;
+    margin: 10%;
+    padding: 15px;
+    flex-grow: 3;
 }
 
 /*statement for finding product*/
 label {
-    margin: 20px;
-    font-size: 20px;
+    width: 100%;
+    font-size: 18px;
     font-weight: bold;
+    color: goldenrod;
+}
+
+/*question css*/
+p {
+    font-size: 20px;
+    width: 80%;
+    margin: 5%;
 }
 
 /*textbox for searching*/
 #startItemText {
-    padding: 6px;
-    margin: 15px auto 20px;
+    padding: 8px;
+    margin: 20px auto 20px;
+    border: none; 
+    border-bottom: 3px solid ghostwhite;
+    background: none;
+    cursor: text;
+    color: yellow;
+    width: 100%;
+    font-size: 25px;
+    outline: none;
+    flex-grow:2; 
 }
 
 /*button to go find the item*/
 .findButton {
     padding: 20px;
-    margin: 20px;
+    margin: 15%;
     cursor: pointer;
+    border-radius: 30px;
+    background: url(images/redpill.jpg) no-repeat;
+    background-size: cover;
+    color: darkblue;
+    transition: 0.5s;
+    width: 150px;
+}
+
+/*hover for findbutton*/
+.findButton:hover {
+    background: url(images/bluepill.jpg) no-repeat;
+    background-size: cover;
+}
+
+.findButton:active {
+    background: darkslateblue;
+}
+
+
+/*autofill text and background*/
+@-webkit-keyframes autofill {
+    0%,100% {
+        color: yellow;
+        background: transparent;
+    }
+}
+
+/*autofill animation*/
+#startItemText:-webkit-autofill {
+    -webkit-animation-delay: 1s; /* Safari support - any positive time runs instantly */
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+}
+
+/*move pill function*/
+.movepill {
+    transform: translate(250px);
+    overflow: -moz-hidden-unscrollable; 
 }
 
 /**********************************/
 /*Find Item screen*/
+#findScreen{
+    margin: 5%;
+}
+
+/*title text let's find...*/
+h2 {
+    margin: 5px;
+    font-size: 22px;
+}
+
 /*text user entered for product name*/
 .userInput{
-    margin: 15px;
+    margin: 10px auto;
+    width: 100%;
+    color: yellow;
+}
+
+.directions{
+    width: 90%;
+    margin: 10px auto;
+    font-size: 20px;
 }
 
 /*box holding all the products it could be*/
 .drugList{
-    padding: 10px;
-    margin: 15px;
-    height: 19em;
+    padding: 15px;
+    margin: 15px auto;
+    height: 18em;
     border: 1px solid black;
+    border-radius: 15px;
     overflow: auto;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    outline: 2px solid black;
+    width: 80%;
+    font-family:  'Vollkorn', serif;
+    flex-grow: 3;
 }
 
-.radioChoice {
-    list-style-type: none;
-    
+.radioChoice{
+    visibility: hidden;
 }
 
+/*label for each choice*/
 .choiceLabel{
+    width: 100%;
+    background: white;
     border: 1px solid black;
-    width: 90%;
+    margin: 2px;
+    display: inline-flex;
+    flex-direction: column;
+
+    padding: 10px;
+    color: black;
+}
+
+/*ndc number text*/
+.ndcNo{
+    width:100%;
+    font-size: 15px;
+    background: white;
     margin: 5px;
 }
 
-.radioChoice:checked + label {
-    border: 3px solid black;
-    background: red;
-
-  }
-
-
-  .choiceLabel:hover {
-    border: 5px solid black;
-    background: blue;
-
-  }
 
 
 
@@ -100,12 +201,45 @@ label {
 
 
 
+
+
+.drugList input[type="radio"]:checked > .ndcNo{
+    background: green;
+    
+}
+
+.drugList .choiceLabel:checked > .radioChoice + .ndcNo {
+    background: purple;
+}
+
+
+
+
+/*radio button hover*/
+.choiceLabel:hover, .choiceLabel:hover > *{
+    background: orange;
+}
 
 /*button after user has selected product*/
 .foundButton {
-    margin: 15px;
+    margin: 10px;
     padding: 20px 35px;
     cursor: pointer;
+    background: white;
+    border-radius: 30px;
+}
+
+
+.foundButton:hover {
+    background: blue;
+}
+
+.foundButton:active{
+    background: darkslateblue; 
+}
+
+.foundButton:disabled{
+    display: none;
 }
 
 /*div where user can re-enter product info*/
@@ -114,43 +248,72 @@ label {
     bottom: 0;
     width: 100%;
     font-size: 20px;
-    padding: 5px;
-    margin: 10px auto;
+    padding: 10px;
+    margin: 5px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex-grow: 2;
 }
 
+/*textfield and button*/
 .searchTextBox{
     display: inline-flex;
+    text-align: center;
+    width: 75%;
 }
 
-/*div for search text box*/
-.searchTextBox2{
-    display: inline-flex;
-    flex-direction: row;
-    justify-content: center;
-    margin: 5px auto;
-    width: 80%;
-    
+/*error message*/
+.error {
+    color: red;
+    font-size: 20px;
+    background:  white;
+    margin: 10px auto;
 }
+
+/*error message title*/
+.eTitle{
+    font-size: 40px;
+    color: red;
+    background:  white;
+    margin: 10px auto;
+}
+
 /*question for re-entering the product*/
 .query1{
     font-size: 14px;
-    padding: 10px;
+    padding: 5px;
     margin: 5px;
+    color: white;
 }
 
-/*text for searching for a new item*/
-#searchText1 {
+/*textfield for drug search*/
+.searchText {
+    background:  white;
     border: 1px solid black;
-    padding: 5px;
+    color: black;
+    padding: 6px;
+    width: 100%;
+    font-size: 20px;
+    border-radius: 5px 0 0 5px;
 }
 
 /*css for search again button*/
-.searchButton1{
+.goButton {
+    border: 1px solid black;
+    border-radius: 0 5px 5px 0;
+    font-size: 20px;
+    background: white;
     padding: 5px;
     cursor: pointer;
+}
+
+.goButton:hover {
+    background: blue;
+}
+
+.goButton:active {
+    background: darkslateblue;
 }
 
 /**********************************/
@@ -161,43 +324,85 @@ main {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    margin: 5%;
 }
 
 /*new search question*/
 .query2{
-    margin: 5px 5px 0 5px;
-    font-size: 12px;
-}
-/*form for results section*/
-.restart {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+    color: orange;
 }
 
-
-
-
-
-
-
-/*css for text area and button on results screen*/
-#searchText2 {
-    width: 100%;
-    border: 1px solid black;
-    border-radius: 5px 0 0 5px;
-    padding: 5px;
+.searchTextBox2 {
+    display: inline-flex;
+    text-align: center;
+    width: 75%;
+    margin: 5px;
 }
 
-.searchButton2 {
-    border: 1px solid black;
-    border-radius: 0 5px 5px 0;
-    font-size: 20px;
-}
- 
+/*css for "Prices"*/
 .resultsText{
     margin: 10px;
+    font-family:  'Merienda', cursive;
 }
+ 
+/*drug description box*/
+.drugDesc{
+    border: 3px solid black;
+}
+
+/*box and text for drug description*/
+.drugDesc, .drugDesc > * {
+    background: white;
+    color: black;
+    width: 90%;
+    text-align: center;
+}
+
+/*drug name on results screen*/
+.drugN {
+    font-size: 25px;
+    color: orange;
+}
+
+.desc {
+    margin: 1%;
+    font-size: 18px;
+}
+
+/*container for drugs css*/
+.box {
+    border: 1px solid black;
+    width: 90%;
+    border-radius: 30px;
+    margin: 1%;
+    text-align: center;
+    color: black;
+}
+
+.box, .box > * {
+    background: white;
+}
+
+/*pricing titles*/
+.title {
+    margin: 5px auto;
+    font: 20px;
+}
+
+/*box text*/
+.box > * {
+    font-size: 18px;
+    margin: 5px auto;
+}
+
+/*box text errors*/
+.error2 {
+    color: red;
+}
+
+
+
+
 
 
 
@@ -207,13 +412,11 @@ main {
 
 /*cheapest box*/
 .cheapest {
-    border: 2px solid black;
-    height: 9em;
-    width: 80%;
-    border-radius: 30px;
-    margin: 10px;
+    background: green;
+}
 
-
+.expensive {
+    background: salmon;
 }
 
 
@@ -224,14 +427,7 @@ main {
 
 
 
-/*container for drugs css*/
-.box {
-    border: 1px solid black;
-    width: 70%;
-    border-radius: 30px;
-    margin: 10px;
 
-}
 
 
 /**********************************/

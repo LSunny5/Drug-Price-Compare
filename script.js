@@ -30,33 +30,37 @@ function printACA(response) {
     //display ACA FUL pricing to webpage
     if (JSON.stringify(response) === '[]') {
         $('.acaBox').html(`
-        <p class="title">ACA FUL Pricing (Medicaid Upper Limit Costs)<p>
-        <p>Sorry there is no ACA FUL pricing for over the counter drugs.</p>`);
+        <p class="title">ACA FUL Pricing</p> 
+        <p class="resultText">(Medicaid Upper Limit Costs)</p>
+        <p class="error2">Sorry there is no ACA FUL pricing for over the counter drugs.</p>`);
     } else {
         let acaPrice = acaFirst.aca_ful;
         let acaCost = (Math.round(acaPrice * 100) / 100).toFixed(2);
 
         $('.drugDesc').append(` 
-            <p>The main ingredient name is ${acaFirst.ingredient}.</p>
+            <p class = "desc">The main ingredient is ${acaFirst.ingredient}.</p>
         `);
 
         $('.acaBox').html(`
-        <p class="title">ACA FUL Pricing (Medicaid Upper Limit Costs)<p>
-        <p>$${acaCost} / ${acaFirst.mdr_unit_type}</p> 
+        <p class="title">ACA FUL Pricing</p>
+        <p class="resultText">(Medicaid Upper Limit Costs)</p>
+        <p class="resultText">$${acaCost} / ${acaFirst.mdr_unit_type}</p> 
         `);
     }
 
     //display AMP pricing to webpage
     if (JSON.stringify(response) === '[]') {
         $('.ampBox').html(`
-        <p class="title">AMP Pricing (Average Manufacturer Price)<p>
-        <p>Sorry there is no AMP data for over the counter drugs.</p>`);
+        <p class="title">AMP Pricing</p>
+        <p class="resultText">(Average Manufacturer Price)</p>
+        <p class="error2">Sorry there is no AMP data for over the counter drugs.</p>`);
     } else {
         let ampPrice = acaFirst.weighted_average_amps;
         let ampCost = (Math.round(ampPrice * 100) / 100).toFixed(2);
         $('.ampBox').html(`
-        <p class="title">AMP Pricing (Average Manufacturer Price)<p>
-        <p>$${ampCost} / ${acaFirst.mdr_unit_type}</p> 
+        <p class="title">AMP Pricing</p>
+        <p class="resultText">(Average Manufacturer Price)</p>
+        <p class="resultText">$${ampCost} / ${acaFirst.mdr_unit_type}</p> 
         `);
     }
 }
@@ -99,7 +103,7 @@ function printNADAC(name, ndc, nPrice, unit, otc) {
     //convert values to usable terms for web app
     let otcYorN = '';
     if (otc === 'Y') {
-        otcYorN = "over the counter";
+        otcYorN = "Over the counter";
     } else {
         otcYorN = "NOT over the counter";
     }
@@ -107,15 +111,16 @@ function printNADAC(name, ndc, nPrice, unit, otc) {
     acaFind(ndc);
     //print to Drug Description Box
     $('.drugDesc').html(` 
-        <p class="title">${name}</p>
-        <p>${name} is ${otcYorN}</p>
-        <p>NDC No: ${ndc}</p>
+        <p class="drugN">${name}</p>
+        <p class = "desc">${otcYorN}</p>
+        <p class = "desc">NDC No: ${ndc}</p>
     `);
 
     //print to nadac box
     $('.nadacBox').html(`
-        <p class="title">NADAC Pricing (Prices Pharmacy Pays)<p>
-        <p> $${nPrice} / ${unit}</p>
+        <p class="title">NADAC Pricing</p>
+        <p class="resultText">(Prices Pharmacy Pays)</p>
+        <p class="resultText"> $${nPrice} / ${unit}</p>
     `);
 }
 
@@ -154,7 +159,9 @@ function displayDrugChoices(responseJson) {
 
     //check to see JSON objects were returned
     if (JSON.stringify(responseJson) === '[]') {
-        $('.drugList').text(`Sorry drug was not found, please try again...`);
+        $('.drugList').html(`
+            <p class="eTitle">Sorry!</p>
+            <p class="error"> Your drug was not found, please search again...<p>`);
         $('.foundButton').attr('disabled', true);
         $('#searchText1').focus();
     } else {
@@ -179,7 +186,7 @@ function displayDrugChoices(responseJson) {
 
             //create radio buttons
             $('.drugList').append(
-                `<label class="choiceLabel" for="${i}"><input type="radio" class="radioChoice" id="${i}" name="drugChoices" value ="${temp[i]}">${temp[i].ndc_description} ${drugType} <p>NDC No: ${temp[i].ndc}</p></label>`
+                `<label class="choiceLabel" for="${i}"><input type="radio" class="radioChoice" id="${i}" name="drugChoices" value ="${temp[i]}">${temp[i].ndc_description} ${drugType} <p class="ndcNo">NDC No: ${temp[i].ndc}</p></label>`
             );
             //set first radio button to be default checked
             $("#0").prop("checked", true);
@@ -228,8 +235,9 @@ function searchAgain() {
 function startApp() {
     $('.startScreen').submit(event => {
         event.preventDefault();
-        const item = $('#startItemText').val();
-        findUserItem(item);
+        const item = $('#startItemText').val().toUpperCase();
+  //      $('.findButton').addClass('movepill');
+        findUserItem(item)
     });
     searchAgain();
     restartApp();

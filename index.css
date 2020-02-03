@@ -89,6 +89,7 @@ p {
     color: darkblue;
     transition: 0.5s;
     width: 150px;
+    background-color: white;
 }
 
 /*hover for findbutton*/
@@ -447,7 +448,6 @@ main {
         width: 230px;
         margin: 4vh;
         padding: 3.75vh;
-        background-color: white;
     }
 
     #findScreen{

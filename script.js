@@ -22,20 +22,32 @@ function restartApp() {
 }
 
 //Display ACA FUL pricing to screen and AMP pricing
-function printACA(response) {
+function printACA(response, nPrice) {
     let acaFirst = response[0];
+
     $('.acaBox').empty();
     $('.ampBox').empty();
 
-    //display ACA FUL pricing to webpage
+    //display ACA FUL pricing to webpage and AMP pricing
     if (JSON.stringify(response) === '[]') {
         $('.acaBox').html(`
         <p class="title">ACA FUL Pricing</p> 
         <p class="resultText">(Medicaid Upper Limit Costs)</p>
         <p class="error2">Sorry there is no ACA FUL pricing for over the counter drugs.</p>`);
+      
+        $('.ampBox').html(`
+        <p class="title">AMP Pricing</p>
+        <p class="resultText">(Average Manufacturer Price)</p>
+        <p class="error2">Sorry there is no AMP data for over the counter drugs.</p>`);
+       
+        $('.nadacBox').removeClass('clear').removeClass('expensive').addClass('cheapest');
+        $('.ampBox').removeClass('cheapest').removeClass('expensive').addClass('clear');
+        $('.acaBox').removeClass('cheapest').removeClass('expensive').addClass('clear');
     } else {
-        let acaPrice = acaFirst.aca_ful;
-        let acaCost = (Math.round(acaPrice * 100) / 100).toFixed(2);
+    let acaPrice = acaFirst.aca_ful;
+    let acaCost = (Math.round(acaPrice * 100) / 100).toFixed(2);
+    let ampPrice = acaFirst.weighted_average_amps;
+        let ampCost = (Math.round(ampPrice * 100) / 100).toFixed(2);
 
         $('.drugDesc').append(` 
             <p class = "desc">The main ingredient is ${acaFirst.ingredient}.</p>
@@ -46,22 +58,49 @@ function printACA(response) {
         <p class="resultText">(Medicaid Upper Limit Costs)</p>
         <p class="resultText">$${acaCost} / ${acaFirst.mdr_unit_type}</p> 
         `);
-    }
 
-    //display AMP pricing to webpage
-    if (JSON.stringify(response) === '[]') {
-        $('.ampBox').html(`
-        <p class="title">AMP Pricing</p>
-        <p class="resultText">(Average Manufacturer Price)</p>
-        <p class="error2">Sorry there is no AMP data for over the counter drugs.</p>`);
-    } else {
-        let ampPrice = acaFirst.weighted_average_amps;
-        let ampCost = (Math.round(ampPrice * 100) / 100).toFixed(2);
         $('.ampBox').html(`
         <p class="title">AMP Pricing</p>
         <p class="resultText">(Average Manufacturer Price)</p>
         <p class="resultText">$${ampCost} / ${acaFirst.mdr_unit_type}</p> 
         `);
+
+        let n = parseFloat(nPrice);
+        let ac = parseFloat(acaCost);
+        let am = parseFloat(ampCost);
+
+        //cheapest price css and check
+        if (n > am) {
+            if (n > ac) {
+                $('.nadacBox').removeClass('clear').removeClass('cheapest').addClass('expensive');
+                if (ac > am) {
+                    $('.ampBox').removeClass('clear').removeClass('expensive').addClass('cheapest');
+                    $('.acaBox').removeClass('cheapest').removeClass('expensive').addClass('clear');
+                } else {
+                    $('.acaBox').removeClass('clear').removeClass('expensive').addClass('cheapest');
+                    $('.ampBox').removeClass('cheapest').removeClass('expensive').addClass('clear');
+                }
+            } else {
+                $('.nadacBox').removeClass('cheapest').removeClass('expensive').addClass('clear');
+                $('.acaBox').removeClass('cheapest').removeClass('clear').addClass('expensive');
+                $('.ampBox').removeClass('clear').removeClass('expensive').addClass('cheapest');
+            }
+        } else {
+            if (n > ac) {
+                $('.acaBox').removeClass('clear').removeClass('expensive').addClass('cheapest');
+                $('.ampBox').removeClass('cheapest').removeClass('clear').addClass('expensive');
+                $('.nadacBox').removeClass('cheapest').removeClass('expensive').addClass('clear');
+            } else {
+                $('.nadacBox').removeClass('clear').removeClass('expensive').addClass('cheapest');
+                if (ac > am) {
+                    $('.acaBox').removeClass('cheapest').removeClass('clear').addClass('expensive');
+                    $('.ampBox').removeClass('cheapest').removeClass('expensive').addClass('clear');
+                } else {
+                    $('.ampBox').removeClass('cheapest').removeClass('clear').addClass('expensive');
+                    $('.acaBox').removeClass('cheapest').removeClass('expensive').addClass('clear');
+                }
+            }
+        }
     }
 }
 
@@ -72,8 +111,8 @@ function formatQueryParams(params) {
     return queryItems.join('&');
 }
 
-//get JSON objects for the ACA FUL values
-function acaFind(drugNDC) {
+//get JSON objects for thoACA FUL values
+function acaFind(drugNDC, nPrice) {
     const paramsACA = {
         ndc: drugNDC
     }
@@ -87,7 +126,7 @@ function acaFind(drugNDC) {
             }
             throw new Error(response.statusText);
         })
-        .then(responseJson => printACA(responseJson))
+        .then(responseJson => printACA(responseJson, nPrice))
         .catch(err => {
             $('.acaBox').text(`Sorry you have encountered an error: ${err.message}`);
         });
@@ -108,7 +147,7 @@ function printNADAC(name, ndc, nPrice, unit, otc) {
         otcYorN = "NOT over the counter";
     }
 
-    acaFind(ndc);
+    acaFind(ndc, nPrice);
     //print to Drug Description Box
     $('.drugDesc').html(` 
         <p class="drugN">${name}</p>
@@ -126,7 +165,7 @@ function printNADAC(name, ndc, nPrice, unit, otc) {
 
 //find the item on the list screen display
 function findUserItem(item) {
-    $('.drugList').empty();
+    $('.radioButtonBox').empty();
     $('.startScreen').addClass('hidden');
     $('main').addClass('hidden');
     $('#findScreen').removeClass('hidden');
@@ -152,14 +191,21 @@ function getValues(checkedResponse) {
     });
 }
 
+
+
+
+
+
+
+
 //display JSON objects to the drug list div for user to find
 function displayDrugChoices(responseJson) {
-    $('.drugList').empty();
+    $('.radioButtonBox').empty();
     let maxResults = responseJson.length;
 
     //check to see JSON objects were returned
     if (JSON.stringify(responseJson) === '[]') {
-        $('.drugList').html(`
+        $('.radioButtonBox').html(`
             <p class="eTitle">Sorry!</p>
             <p class="error"> Your drug was not found, please search again...<p>`);
         $('.foundButton').attr('disabled', true);
@@ -185,14 +231,25 @@ function displayDrugChoices(responseJson) {
             }
 
             //create radio buttons
-            $('.drugList').append(
+            $('.radioButtonBox').append(
                 `<label class="choiceLabel" for="${i}"><input type="radio" class="radioChoice" id="${i}" name="drugChoices" value ="${temp[i]}">${temp[i].ndc_description} ${drugType} <p class="ndcNo">NDC No: ${temp[i].ndc}</p></label>`
             );
             //set first radio button to be default checked
-            $("#0").prop("checked", true);
+            $('#0').prop('checked', true);
+            $('#0').parent().addClass('active');
+            
             $('.foundButton').attr('disabled', false);
         }
+        
         getValues(temp);
+
+      
+        $('.radioChoice').click(function() {
+            $('label').removeClass('active');
+            if ($(this).is(':checked')) {
+                $(this).parent().addClass('active');
+            }
+        });
     }
 }
 
@@ -201,6 +258,10 @@ function drugFind(drugName) {
     let capDrug = drugName.toUpperCase();
     const filter = `'%25${capDrug}%25'`;
     const url = baseNURL + filter;
+
+    $('.nadacBox').children().css('background', 'white');
+    $('.ampBox').children().css('background', 'white');
+    $('.acaBox').children().css('background', 'white');
 
     fetch(url)
         .then(response => {
@@ -211,7 +272,7 @@ function drugFind(drugName) {
         })
         .then(responseJson => displayDrugChoices(responseJson))
         .catch(err => {
-            $('.drugList').text(`Sorry you have encountered an error: ${err.message}`);
+            $('.radioButtonBox').text(`Sorry you have encountered an error: ${err.message}`);
         });
 }
 
@@ -236,7 +297,6 @@ function startApp() {
     $('.startScreen').submit(event => {
         event.preventDefault();
         const item = $('#startItemText').val().toUpperCase();
-  //      $('.findButton').addClass('movepill');
         findUserItem(item)
     });
     searchAgain();

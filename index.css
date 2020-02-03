@@ -13,11 +13,13 @@
     text-align: center;
     font-family:  'Vollkorn', serif;
     color: white;
+    margin: 0;
+    height: 100%;
 }
 
 h1 {
     font-family:  'Merienda', cursive;
-    font-size: 36px;
+    font-size: 5vh;
     margin: 5vh;
 }
 
@@ -30,7 +32,7 @@ h1 {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    margin: 8vh 5vh;
+    margin: 6vh 5vh;
 
 }
 
@@ -124,7 +126,7 @@ p {
 /*title text let's find...*/
 h2 {
     margin: 5px;
-    font-size: 22px;
+    font-size: 4vh;
 }
 
 /*text user entered for product name*/
@@ -132,19 +134,20 @@ h2 {
     margin: 10px auto;
     width: 100%;
     color: yellow;
+    font-size: 4vh;
 }
 
 .directions{
     width: 90%;
     margin: 10px auto;
-    font-size: 20px;
+    font-size: 2vh;
 }
 
 /*box holding all the products it could be*/
 .drugList{
     padding: 10px;
     margin: 15px auto;
-    height: 50vh;
+    height: 45vh;
     border: 1px solid black;
     border-radius: 15px;
     display: flex;
@@ -157,17 +160,15 @@ h2 {
 
 }
 
+/*box holding radio button choices*/
 .radioButtonBox{
     background: white;
     overflow-y: auto;
-
     width: 100%;
     padding: 10px;
-    
-    
-    
 }
 
+/*remove radio button circle*/
 .radioChoice{
     display: none;
 }
@@ -185,20 +186,16 @@ h2 {
 }
 
 /*ndc number text*/
-.ndcNo{
+.ndcNo, .otcPrint{
     width:100%;
     font-size: 15px;
     background: white;
     margin: 5px;
 }
 
-
-
-
 /*css for ndc no in list display selected*/
 input[type="radio"]:checked ~ *{
-    background: orange;
-    
+    background: orange;   
 }
 
 /*selected radio label*/
@@ -206,12 +203,6 @@ input[type="radio"]:checked ~ *{
     background: orange;
     border: 5px solid black;
 }
-
-
-
-
-
-
 
 /*radio button hover*/
 .choiceLabel:hover, .choiceLabel:hover > p {
@@ -221,10 +212,11 @@ input[type="radio"]:checked ~ *{
 /*button after user has selected product*/
 .foundButton {
     margin: 10px;
-    padding: 20px 35px;
+    padding: 3vh;
     cursor: pointer;
     background: white;
     border-radius: 30px;
+    font-size: 2.5vh;
 }
 
 .foundButton:hover {
@@ -245,7 +237,6 @@ input[type="radio"]:checked ~ *{
     bottom: 0;
     width: 100%;
     font-size: 20px;
-    padding: 10px;
     margin: 5px auto;
     display: flex;
     flex-direction: column;
@@ -323,22 +314,29 @@ main {
     margin: 5%;
 }
 
+/*search form box for result screen*/
+.restart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 /*new search question*/
 .query2{
     color: orange;
+    font-size: 2vh;
 }
 
 .searchTextBox2 {
     display: inline-flex;
     text-align: center;
-    width: 75%;
-    margin: 5px;
+    width: 95%;
 }
 
-/*css for "Prices"*/
-.resultsText{
+/*css for description of boxes*/
+.resultText{
     margin: 10px;
-    font-family:  'Merienda', cursive;
+    font-size: 2vh;
 }
  
 /*drug description box*/
@@ -356,13 +354,15 @@ main {
 
 /*drug name on results screen*/
 .drugN {
-    font-size: 25px;
+    font-size: 4vh;
     color: orange;
+    margin: 3px auto;
 }
 
+/*text for drug description on results*/
 .desc {
     margin: 1% auto;
-    font-size: 18px;
+    font-size: 2vh;
 }
 
 /*container for drugs css*/
@@ -379,42 +379,44 @@ main {
     background: white;
 }
 
-/*pricing titles*/
-.title {
-    margin: 5px auto;
-    font: 20px;
-
-}
-
 /*box text*/
 .box > * {
-    font-size: 18px;
     margin: 5px auto;
+}
+
+/*pricing titles*/
+.dTitle {
+    margin: 5px auto;
+    font-size: 3vh;
+    font-family:  'Merienda', cursive;
+}
+
+/*css for price*/
+.pResultText {
+    font-size: 3.5vh;
 }
 
 /*box text errors*/
 .error2 {
     color: red;
+    font-size: 3vh;
 }
 
 /*cheapest box*/
 .cheapest, .cheapest > * {
     background: green;
-    font-size: 20px;
-
 }
 
 /*expensive box*/
 .expensive, .expensive > * {
     background: salmon;
-    font-size: 16px;
-
+    font-weight: bolder;
 }
 
 /*make box white*/
 .clear, .clear > * {
     background: white;
-    font-size: 18px;
+    font-weight: normal;
 }
 
 /**********************************/
@@ -423,5 +425,144 @@ main {
     display: none;
  }
 
+/*css for tablets*/
+ @media only screen and (min-width: 600px) {
+    #startItemText{
+        margin: 5vh auto;
+        font-size: 4vh;
+    }
+    
+    .startForm{
+        width: 80%;
+        margin: 3vh;
+    }
+    
+    .startQuery {
+        margin: 3vh auto;
+        font-size: 3vh;
+    }
 
+    .findButton{
+        font-size: 2vh;
+        width: 230px;
+        margin: 4vh;
+        padding: 3.75vh;
+    }
+
+    #findScreen{
+        padding: 3vh;
+    }
+
+    .choiceLabel{
+        font-size: 2.5vh;
+    }
+
+    .drugDesc{
+        padding: 2vh;
+    }
+
+    .drugN{
+        font-size: 3.5vh;
+    }
+
+    .desc {
+        font-size: 2vh;
+    }
+
+    .restart {
+        width: 80%;
+    }
+
+    #searchText2 {
+        font-size: 3vh;
+    }
+
+    .cheapest {
+        padding: 2vh;
+    }
+
+    .expensive {
+        padding: 2vh;
+    }
+}
+ 
+/*css for laptops*/
+@media only screen and (min-width: 1024px) {
+    #startItemText{
+        margin: 7vh auto;
+        font-size: 4vh;
+    }
+    
+    p {
+        margin: 4%;
+    }
+    
+    #findScreen {
+        margin: 2% 5%;
+    }
+
+    .drugList {
+        height: 40vh;
+    }
+
+    .choiceLabel {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .ndcNo, .otcPrint {
+        width: 30%;
+    }
+
+    main {
+        display: inline-flex;
+        margin: 2% 5%;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+    }
+
+    .restart {
+        order: 1;
+        width: 90%;
+    }
+
+    .resultsText {
+        width: 100%;
+        order: 2;
+    }
+
+    .drugDesc {
+        order: 3;
+        width: 80%;
+        margin: 2vh;
+    }
+
+    .ampBox {
+        order: 4;
+        width: 100%;
+    }
+
+    .nadacBox {
+        order: 5;
+        width: 40%;
+    }
+
+    .acaBox {
+        order: 6;
+        width:45%;
+    }
+    
+    .cheapest {
+        padding: 2vh;
+
+    }
+
+    .expensive {
+        padding: 2vh;
+    }
+}
+ 
 

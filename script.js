@@ -31,12 +31,12 @@ function printACA(response, nPrice) {
     //display ACA FUL pricing to webpage and AMP pricing
     if (JSON.stringify(response) === '[]') {
         $('.acaBox').html(`
-        <p class="title">ACA FUL Pricing</p> 
+        <p class="dTitle">ACA FUL Pricing</p> 
         <p class="resultText">(Medicaid Upper Limit Costs)</p>
         <p class="error2">Sorry there is no ACA FUL pricing for over the counter drugs.</p>`);
       
         $('.ampBox').html(`
-        <p class="title">AMP Pricing</p>
+        <p class="dTitle">AMP Pricing</p>
         <p class="resultText">(Average Manufacturer Price)</p>
         <p class="error2">Sorry there is no AMP data for over the counter drugs.</p>`);
        
@@ -54,15 +54,15 @@ function printACA(response, nPrice) {
         `);
 
         $('.acaBox').html(`
-        <p class="title">ACA FUL Pricing</p>
+        <p class="dTitle">ACA FUL Pricing</p>
         <p class="resultText">(Medicaid Upper Limit Costs)</p>
-        <p class="resultText">$${acaCost} / ${acaFirst.mdr_unit_type}</p> 
+        <p class="pResultText">$${acaCost} / ${acaFirst.mdr_unit_type}</p> 
         `);
 
         $('.ampBox').html(`
-        <p class="title">AMP Pricing</p>
+        <p class="dTitle">AMP Pricing</p>
         <p class="resultText">(Average Manufacturer Price)</p>
-        <p class="resultText">$${ampCost} / ${acaFirst.mdr_unit_type}</p> 
+        <p class="pResultText">$${ampCost} / ${acaFirst.mdr_unit_type}</p> 
         `);
 
         let n = parseFloat(nPrice);
@@ -157,9 +157,9 @@ function printNADAC(name, ndc, nPrice, unit, otc) {
 
     //print to nadac box
     $('.nadacBox').html(`
-        <p class="title">NADAC Pricing</p>
+        <p class="dTitle">NADAC Pricing</p>
         <p class="resultText">(Prices Pharmacy Pays)</p>
-        <p class="resultText"> $${nPrice} / ${unit}</p>
+        <p class="pResultText"> $${nPrice} / ${unit}</p>
     `);
 }
 
@@ -232,7 +232,7 @@ function displayDrugChoices(responseJson) {
 
             //create radio buttons
             $('.radioButtonBox').append(
-                `<label class="choiceLabel" for="${i}"><input type="radio" class="radioChoice" id="${i}" name="drugChoices" value ="${temp[i]}">${temp[i].ndc_description} ${drugType} <p class="ndcNo">NDC No: ${temp[i].ndc}</p></label>`
+                `<label class="choiceLabel" for="${i}"><input type="radio" class="radioChoice" id="${i}" name="drugChoices" value ="${temp[i]}">${temp[i].ndc_description}<p class="otcPrint">${drugType}</p><p class="ndcNo">NDC No: ${temp[i].ndc}</p></label>`
             );
             //set first radio button to be default checked
             $('#0').prop('checked', true);

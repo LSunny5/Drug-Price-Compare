@@ -19,12 +19,12 @@
         <h1>Drug Price Compare</h1>
         <p>See different pricings for a particular drug. </p>
         <form class="startForm">
-            <label for="query">Please enter the drug name:</label>
+            <label for="startItemText">Please enter the drug name:</label>
             <br>
             <input type="text" name="query" id="startItemText" placeholder="tamiflu, penicilin, etc... "
                 autofocus="autofocus" required>
             <br>
-            <button class="findButton" type="submit" aria-labelledby="Submit drug name Button">Find my drug!</button>
+            <button class="findButton" type="submit">Find my drug!</button>
         </form>
     </section>
 
@@ -37,21 +37,21 @@
         </div>
         <button class="foundButton" type="submit">That's it! Let's Go!</button>
         <form class="searchBox">
-            <label for="repeat">Can't find your item? Enter item again...</label>
+            <label for="searchText1">Can't find your item? Enter item again...</label>
             <div class="searchTextBox">
                 <input type="text" class="searchText" name="repeat" id="searchText1" placeholder="Enter item here... ">
-                <button class="goButton" type="submit" aria-labelledby="Submit after choosing drug Button">&#10148;</button>
+                <button class="goButton" type="submit">&#10148;</button>
             </div>
         </form>
     </section>
 
     <main class="hidden">
         <form class="restart">
-            <label for="repeatSearch">New Search?</label>
+            <label for="searchText2">New Search?</label>
             <div class="searchTextBox2">
                 <input type="text" class="searchText" name="repeatSearch" id="searchText2"
                     placeholder="Enter item here... " required>
-                <button class="goButton" type="submit" aria-labelledby="Search again button">&#10148;</button>
+                <button class="goButton" type="submit">&#10148;</button>
             </div>
         </form>
         <h2 class="resultsText">Prices</h2>

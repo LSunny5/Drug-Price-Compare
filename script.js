@@ -28,25 +28,25 @@ function printACA(response, nPrice) {
     $('.acaBox').empty();
     $('.ampBox').empty();
 
-    //display ACA FUL pricing to webpage and AMP pricing
+    //display ACA FUL pricing to webpage and AMP pricing and css flair
     if (JSON.stringify(response) === '[]') {
         $('.acaBox').html(`
         <p class="dTitle">ACA FUL Pricing</p> 
         <p class="resultText">(Medicaid Upper Limit Costs)</p>
         <p class="error2">Sorry there is no ACA FUL pricing for over the counter drugs.</p>`);
-      
+
         $('.ampBox').html(`
         <p class="dTitle">AMP Pricing</p>
         <p class="resultText">(Average Manufacturer Price)</p>
         <p class="error2">Sorry there is no AMP data for over the counter drugs.</p>`);
-       
+
         $('.nadacBox').removeClass('clear').removeClass('expensive').addClass('cheapest');
         $('.ampBox').removeClass('cheapest').removeClass('expensive').addClass('clear');
         $('.acaBox').removeClass('cheapest').removeClass('expensive').addClass('clear');
     } else {
-    let acaPrice = acaFirst.aca_ful;
-    let acaCost = (Math.round(acaPrice * 100) / 100).toFixed(2);
-    let ampPrice = acaFirst.weighted_average_amps;
+        let acaPrice = acaFirst.aca_ful;
+        let acaCost = (Math.round(acaPrice * 100) / 100).toFixed(2);
+        let ampPrice = acaFirst.weighted_average_amps;
         let ampCost = (Math.round(ampPrice * 100) / 100).toFixed(2);
 
         $('.drugDesc').append(` 
@@ -69,7 +69,7 @@ function printACA(response, nPrice) {
         let ac = parseFloat(acaCost);
         let am = parseFloat(ampCost);
 
-        //cheapest price css and check
+        //cheapest price css and checking 
         if (n > am) {
             if (n > ac) {
                 $('.nadacBox').removeClass('clear').removeClass('cheapest').addClass('expensive');
@@ -191,13 +191,6 @@ function getValues(checkedResponse) {
     });
 }
 
-
-
-
-
-
-
-
 //display JSON objects to the drug list div for user to find
 function displayDrugChoices(responseJson) {
     $('.radioButtonBox').empty();
@@ -215,8 +208,8 @@ function displayDrugChoices(responseJson) {
         let temp = [...new Map(responseJson.map(drug => [drug.ndc, drug])).values()];
 
         //sort results with drug name and then the ndc number
-        temp.sort(function (a,b) {
-            return a.ndc_description.localeCompare(b.ndc_description) || a.ndc-b.ndc;
+        temp.sort(function (a, b) {
+            return a.ndc_description.localeCompare(b.ndc_description) || a.ndc - b.ndc;
         })
 
         //cycle through each object in created temp array
@@ -237,14 +230,14 @@ function displayDrugChoices(responseJson) {
             //set first radio button to be default checked
             $('#0').prop('checked', true);
             $('#0').parent().addClass('active');
-            
+
             $('.foundButton').attr('disabled', false);
         }
-        
+
         getValues(temp);
 
-      
-        $('.radioChoice').click(function() {
+        //making the css change on radio button selection click
+        $('.radioChoice').click(function () {
             $('label').removeClass('active');
             if ($(this).is(':checked')) {
                 $(this).parent().addClass('active');

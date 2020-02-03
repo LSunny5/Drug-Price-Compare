@@ -12,15 +12,15 @@
  body {
     text-align: center;
     font-family:  'Vollkorn', serif;
-    color: white;
+    color: ghostwhite;
     margin: 0;
     height: 100%;
 }
 
 h1 {
     font-family:  'Merienda', cursive;
-    font-size: 5vh;
-    margin: 5vh;
+    font-size: 6vh;
+    margin: 4vh;
 }
 
 /**********************************/
@@ -40,28 +40,28 @@ h1 {
 .summary {
     text-align: center;
     margin: 30px;
-    width: 75%;
+    width: 80%;
 }
 
 /*form for user to enter product they want to search*/
 .startForm {
-    margin: 10%;
+    margin: 9%;
     padding: 15px;
 }
 
 /*statement for finding product*/
 label {
     width: 100%;
-    font-size: 18px;
+    font-size: 3vh;
     font-weight: bold;
-    color: goldenrod;
+    color: orange;
 }
 
 /*question css*/
 p {
-    font-size: 20px;
+    font-size: 3.5vh;
     width: 80%;
-    margin: 5%;
+    margin: 4%;
 }
 
 /*textbox for searching*/
@@ -267,7 +267,7 @@ input[type="radio"]:checked ~ *{
 }
 
 /*question for re-entering the product*/
-.query1{
+.searchBox label{
     font-size: 14px;
     padding: 5px;
     margin: 5px;
@@ -322,7 +322,7 @@ main {
 }
 
 /*new search question*/
-.query2{
+.restart label{
     color: orange;
     font-size: 2vh;
 }
@@ -437,7 +437,7 @@ main {
         margin: 3vh;
     }
     
-    .startQuery {
+    .startForm label {
         margin: 3vh auto;
         font-size: 3vh;
     }
@@ -521,7 +521,6 @@ main {
         margin: 2% 5%;
         flex-direction: row;
         flex-wrap: wrap;
-
     }
 
     .restart {
@@ -557,12 +556,9 @@ main {
     
     .cheapest {
         padding: 2vh;
-
     }
 
     .expensive {
         padding: 2vh;
     }
 }
- 
-

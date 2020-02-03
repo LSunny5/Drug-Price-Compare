@@ -6,14 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Drug Price Compare Application</title>
-    <meta name="description"
-        content="This app will show the prices of different drugs set at different standards. ">
+    <meta name="description" content="This app will show the prices of different drugs set at different standards. ">
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
     <link rel="shortcut icon" href="#">
     <link href="https://fonts.googleapis.com/css?family=Merienda%7CVollkorn&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
-    
 </head>
 
 <body>
@@ -21,12 +19,12 @@
         <h1>Drug Price Compare</h1>
         <p>See different pricings for a particular drug. </p>
         <form class="startForm">
-            <label for="query" class="startQuery">Please enter the drug name:</label>
+            <label for="query">Please enter the drug name:</label>
             <br>
             <input type="text" name="query" id="startItemText" placeholder="tamiflu, penicilin, etc... "
                 autofocus="autofocus" required>
             <br>
-            <button class="findButton" type="submit">Find my drug!</button>
+            <button class="findButton" type="submit" aria-labelledby="Submit drug name Button">Find my drug!</button>
         </form>
     </section>
 
@@ -39,22 +37,21 @@
         </div>
         <button class="foundButton" type="submit">That's it! Let's Go!</button>
         <form class="searchBox">
-            <label class="query1" for="repeat">Can't find your item? Enter item again...</label>
+            <label for="repeat">Can't find your item? Enter item again...</label>
             <div class="searchTextBox">
-                <input type="text" class="searchText" name="repeat" id="searchText1"
-                    placeholder="Enter item here... ">
-                <button class="goButton" type="submit">&#10148;</button>
+                <input type="text" class="searchText" name="repeat" id="searchText1" placeholder="Enter item here... ">
+                <button class="goButton" type="submit" aria-labelledby="Submit after choosing drug Button">&#10148;</button>
             </div>
         </form>
     </section>
 
     <main class="hidden">
         <form class="restart">
-            <label class="query2" for="repeatSearch">New Search?</label>
+            <label for="repeatSearch">New Search?</label>
             <div class="searchTextBox2">
-                <input type="text" class="searchText" name="repeatSearch" id="searchText2" placeholder="Enter item here... "
-                required>
-                <button class="goButton" type="submit">&#10148;</button>
+                <input type="text" class="searchText" name="repeatSearch" id="searchText2"
+                    placeholder="Enter item here... " required>
+                <button class="goButton" type="submit" aria-labelledby="Search again button">&#10148;</button>
             </div>
         </form>
         <h2 class="resultsText">Prices</h2>
@@ -67,4 +64,5 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>

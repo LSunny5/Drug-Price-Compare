@@ -21,6 +21,7 @@ h1 {
     font-family:  'Merienda', cursive;
     font-size: 6vh;
     margin: 4vh;
+    color: gray;
 }
 
 /**********************************/
@@ -40,6 +41,7 @@ h1 {
     text-align: center;
     margin: 30px;
     width: 80%;
+    color: blue;
 }
 
 /*form for user to enter product they want to search*/
@@ -53,7 +55,7 @@ label {
     width: 100%;
     font-size: 3vh;
     font-weight: bold;
-    color: orange;
+    color: red;
 }
 
 /*question css*/
